@@ -1,6 +1,7 @@
 var ssbKeys = require('ssb-keys')
 var ssbConfigInject = require('ssb-config/inject')
 var path = require('path')
+var sbot = require('scuttlebot')
 
 module.exports = function startSSB() {
     var config = ssbConfigInject()
@@ -8,7 +9,7 @@ module.exports = function startSSB() {
     config.keys = ssbKeys.loadOrCreateSync(keyPath)
     // config.logging.level = ''
 
-    return require('scuttlebot/index')
+    return sbot
         .use(require('scuttlebot/plugins/plugins'))
         .use(require('scuttlebot/plugins/master'))
         .use(require('scuttlebot/plugins/gossip'))

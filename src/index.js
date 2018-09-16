@@ -24,16 +24,18 @@ var KEYS = {
     curve: process.env.KEYS_CURVE
 }
 
+console.log('keys', KEYS)
+
 var remote = ('ws://localhost:8989~shs:' +
     KEYS.id.substring(1, KEYS.id.indexOf('.')))
 
 SSBClient(KEYS, {
     // using the main network
-    remote,
+    remote: remote,
     caps: SSBConfig.caps,
     manifest: SSBManifest
 }, function (err, sbot, config) {
-    if (err) throw err
+    if (err) return console.log('err', err)
     console.log('wooo sbot')
 })
 
