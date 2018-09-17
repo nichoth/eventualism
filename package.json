@@ -32,6 +32,7 @@
     "preact": "^8.2.9",
     "preact-compat": "^3.18.0",
     "pull-stream": "^3.6.9",
+    "pull-ws": "^3.3.1",
     "ruta3": "^2.0.1",
     "scuttlebot": "^12.0.0",
     "ssb-about": "^0.1.2",

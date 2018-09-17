@@ -27,3 +27,28 @@ module.exports = function startSSB() {
         .call(null, config)
 }
 
+
+
+// var KEYS = {
+//     id: process.env.KEYS_ID,
+//     public: process.env.KEYS_PUBLIC,
+//     private: process.env.KEYS_PRIVATE,
+//     curve: process.env.KEYS_CURVE
+// }
+
+// console.log('keys', KEYS)
+
+// var remote = ('ws://localhost:8989~shs:' +
+//     KEYS.id.substring(1, KEYS.id.indexOf('.')))
+
+// SSBClient(KEYS, {
+//     // using the main network
+//     remote: remote,
+//     caps: SSBConfig.caps,
+//     manifest: SSBManifest
+// }, function (err, sbot, config) {
+//     if (err) return console.log('err', err)
+//     console.log('wooo sbot')
+// })
+
+

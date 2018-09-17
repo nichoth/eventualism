@@ -15,11 +15,7 @@ function App (props) {
         router.selectState(props, props.route.pathname) :
         null
 
-    return <div>
-        view/index
-
-        <hr />
-
+    return <div id="app-root">
         <div className="app-content">
             <RouteView {...routeState} emit={emit} />
         </div>
