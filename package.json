@@ -29,6 +29,7 @@
     "@nichoth/events": "^1.0.0",
     "@nichoth/observ": "^0.5.0",
     "@nichoth/preact-connect": "^1.0.0",
+    "muxrpc": "^6.4.1",
     "preact": "^8.2.9",
     "preact-compat": "^3.18.0",
     "pull-stream": "^3.6.9",
