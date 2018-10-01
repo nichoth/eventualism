@@ -1,6 +1,7 @@
 var catchRoutes = require('@nichoth/catch-routes')
 var evs = require('../EVENTS')
 
+
 function Effects ({ state, view }) {
     catchRoutes(parsedUrl => state.route.set(parsedUrl))
 
