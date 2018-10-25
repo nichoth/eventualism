@@ -2,31 +2,25 @@ var { h, render } = require('preact')
 var connect = require('@nichoth/preact-connect')
 var Bus = require('@nichoth/events')
 var { struct, observ } = require('./lib')
-var connectSbot = require('./connect-sbot')
 var Effects = require('./effects')
 var View = require('./view')
 var evs = require('./EVENTS')
 
-connectSbot({
-    onClose: function (err) {
-        console.log('rpc close', err)
-    }
-}, function onConnect (err, sbot) {
-    if (err) throw err
-    console.log('got ws sbot')
-    sbot.whoami(function () {
-        console.log('whoami', arguments)
-    })
-})
-
+var bus = Bus({ memo: true })
 var state = struct({
     route: struct({}),
-    homeRoute: struct({
-        hello: observ('world')
+
+    sbotConnection: struct({
+        isResolving: observ(false),
+        error: observ(null),
+        isConnected: observ(false)
+    }),
+
+    messages: struct({
+        data: observ([])
     })
 })
 
-var bus = Bus({ memo: true })
 var effects = Effects({ state, view: bus })
 var _view = connect({ state, bus, view: View })
 render(h(_view), document.getElementById('content'))
@@ -39,4 +33,14 @@ if (process.env.NODE_ENV === 'development') {
         evs
     }
 }
+
+effects.connectSbot(function (err, sbot) {
+    if (err) return
+    sbot.whoami(function (err, res) {
+        console.log('whoami', err, res)
+    })
+
+    effects.getMessages(sbot)
+})
+
 

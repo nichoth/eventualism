@@ -5,7 +5,6 @@ var ws = require('pull-ws/server')
 var manifest = require('../manifest.json')
 var startSSB = require('./start-ssb')
 
-
 // if we are running this as CLI, not as a module
 if (require.main === module) start()
 
@@ -18,7 +17,7 @@ function start () {
     })
 
     var sbot = startSSB()
-    console.log(Object.keys(sbot))
+    // console.log(Object.keys(sbot))
 
 
     ws({ server }, function onConnection (wsStream) {

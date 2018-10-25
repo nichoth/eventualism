@@ -3,6 +3,7 @@ var ssbConfigInject = require('ssb-config/inject')
 var path = require('path')
 var sbot = require('scuttlebot')
 
+// @TODO check if global sbot is running and use that if possible
 module.exports = function startSSB() {
     var config = ssbConfigInject()
     var keyPath = path.join(config.path, 'secret')

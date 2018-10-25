@@ -1,3 +1,16 @@
 body {
 }
 
+.main-feed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .evt-message {
+        width: 20%;
+        border: 1px solid black;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+}
+

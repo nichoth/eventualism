@@ -4,7 +4,9 @@ function SelectState () {
     var router = Routes()
 
     router.addRoute('/', function (state, match) {
-        return state.homeRoute
+        return {
+            messages: state.messages
+        }
     })
 
     return function selectState (state, pathname) {

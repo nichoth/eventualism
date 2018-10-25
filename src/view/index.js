@@ -6,19 +6,28 @@ function App (props) {
         console.log('render', props)
     }
 
-    var { emit } = props
-    var RouteView = props.route.pathname ?
-        router.getView(props.route.pathname) :
+    var { emit, route } = props
+    var RouteView = route.pathname ?
+        router.getView(route.pathname) :
         null
 
-    var routeState = props.route.pathname ?
-        router.selectState(props, props.route.pathname) :
+    var routeState = route.pathname ?
+        router.selectState(props, route.pathname) :
         null
 
     return <div id="app-root">
         <div className="app-content">
+            <Connection {...props} />
             <RouteView {...routeState} emit={emit} />
         </div>
+    </div>
+}
+
+function Connection (props) {
+    return <div className="evt-connection-state">
+        <pre>
+            {JSON.stringify(props.sbotConnection, null, 2)}
+        </pre>
     </div>
 }
 
