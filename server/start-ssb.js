@@ -6,6 +6,14 @@ var sbot = require('scuttlebot')
 // @TODO check if global sbot is running and use that if possible
 module.exports = function startSSB() {
     var config = ssbConfigInject()
+
+    // var config = ssbConfigInject('woo-testing', {
+    //     // Path to the application data folder, which contains the
+    //     // private key, message attachment data (blobs) and the
+    //     // leveldb backend
+    //     // path: '/foo/bar'
+    // })
+
     var keyPath = path.join(config.path, 'secret')
     config.keys = ssbKeys.loadOrCreateSync(keyPath)
     // config.logging.level = ''

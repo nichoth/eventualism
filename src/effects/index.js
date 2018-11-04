@@ -45,8 +45,10 @@ function Effects ({ state, view }) {
                     reverse: true,
                     limit: 10
                 }),
+
                 S.collect(function (err, msgs) {
                     if (err) return console.log('err', err)
+                    console.log('msgs', msgs)
                     state.messages.data.set(msgs)
                 })
             )
