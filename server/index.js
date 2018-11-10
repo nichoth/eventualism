@@ -17,8 +17,6 @@ function start () {
     })
 
     var sbot = startSSB()
-    // console.log(Object.keys(sbot))
-
 
     ws({ server }, function onConnection (wsStream) {
         console.log('got ws connection')
@@ -31,6 +29,8 @@ function start () {
 
         S(wsStream, rpcServerStream, wsStream)
     })
+
+    return { server, sbot }
 }
 
 module.exports = start

@@ -1,12 +1,9 @@
 var S = require('pull-stream')
-var catchRoutes = require('@nichoth/catch-routes')
 var _connectSbot = require('../connect-sbot')
 var evs = require('../EVENTS')
 function noop () {}
 
-function Effects ({ state, view }) {
-    catchRoutes(parsedUrl => state.route.set(parsedUrl))
-
+function Effects ({ state }) {
     var effects = {
         onClick: function (ev) {
             ev.preventDefault()
@@ -39,6 +36,10 @@ function Effects ({ state, view }) {
             })
         },
 
+        publishPost: function (sbot, post, cb) {
+            sbot.publish(post, cb)
+        },
+
         getMessages: function (sbot) {
             S(
                 sbot.createLogStream({
@@ -57,7 +58,9 @@ function Effects ({ state, view }) {
     }
 
     // listen for DOM events
-    view.on(evs.hello.world, effects.onClick)
+    effects.subscribeToView = function ({ view }) {
+        view.on(evs.hello.world, effects.onClick)
+    }
 
     return effects
 }

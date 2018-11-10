@@ -1,27 +1,18 @@
 var { h, render } = require('preact')
 var connect = require('@nichoth/preact-connect')
+var catchRoutes = require('@nichoth/catch-routes')
 var Bus = require('@nichoth/events')
-var { struct, observ } = require('./lib')
 var Effects = require('./effects')
+var { createState } = require('./state')
 var View = require('./view')
 var evs = require('./EVENTS')
 
+var state = createState()
 var bus = Bus({ memo: true })
-var state = struct({
-    route: struct({}),
+catchRoutes(parsedUrl => state.route.set(parsedUrl))
 
-    sbotConnection: struct({
-        isResolving: observ(false),
-        error: observ(null),
-        isConnected: observ(false)
-    }),
-
-    messages: struct({
-        data: observ([])
-    })
-})
-
-var effects = Effects({ state, view: bus })
+var effects = Effects({ state })
+effects.subscribeToView({ view: bus })
 var _view = connect({ state, bus, view: View })
 render(h(_view), document.getElementById('content'))
 
@@ -42,5 +33,4 @@ effects.connectSbot(function (err, sbot) {
 
     effects.getMessages(sbot)
 })
-
 
