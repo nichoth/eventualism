@@ -1,7 +1,7 @@
 var S = require('pull-stream')
 var wsClient = require('pull-ws/client')
 var muxrpc = require('muxrpc')
-var manifest = require('../manifest.json')
+var manifest = require('../../manifest.json')
 var WS_URL = 'ws://localhost:8000'
 
 function connectSbot ({ onClose } = {}, cb) {

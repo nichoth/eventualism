@@ -1,2 +1,0 @@
-var { Model } = require('../lib')
-

@@ -1,3 +1,4 @@
+require('dotenv').config()
 var http = require('http')
 var S = require('pull-stream')
 var muxrpc = require('muxrpc')

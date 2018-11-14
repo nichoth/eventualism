@@ -1,4 +1,11 @@
 {
+  "name": "eventualism",
+  "description": "## start Start a local development server",
+  "version": "0.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "engines": {
     "npm": "^5.0.0",
     "node": "^8.0.0"
@@ -29,9 +36,15 @@
     "@nichoth/events": "^1.0.0",
     "@nichoth/observ": "^0.5.0",
     "@nichoth/preact-connect": "^1.0.0",
+    "@uppy/core": "^0.28.0",
+    "@uppy/dashboard": "^0.28.0",
+    "@uppy/file-input": "^0.28.0",
+    "@uppy/xhr-upload": "^0.28.0",
+    "dotenv": "^6.1.0",
     "muxrpc": "^6.4.1",
     "preact": "^8.2.9",
     "preact-compat": "^3.18.0",
+    "pull-file-reader": "^1.0.2",
     "pull-stream": "^3.6.9",
     "pull-ws": "^3.3.1",
     "ruta3": "^2.0.1",
@@ -45,7 +58,8 @@
     "ssb-keys": "^7.0.16",
     "ssb-private": "^0.2.3",
     "ssb-query": "^2.2.1",
-    "ssb-serve-blobs": "^1.0.0"
+    "ssb-serve-blobs": "^1.0.0",
+    "xtend": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
@@ -66,12 +80,23 @@
     "eslint-plugin-react": "^7.9.1",
     "husky": "^0.14.3",
     "inline-htmlify": "^2.0.1",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.10.0",
     "scuttle-testbot": "^1.1.6",
+    "stream-to-pull-stream": "^1.7.2",
     "tape": "^4.9.0",
     "tape-run": "^4.0.0",
     "uglify-js": "^3.3.25",
     "unassertify": "^2.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/eventualism.git"
+  },
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/eventualism/issues"
+  },
+  "homepage": "https://github.com/nichoth/eventualism#readme",
   "private": true
 }
