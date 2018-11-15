@@ -1,8 +1,5 @@
 require('dotenv').config()
 var http = require('http')
-var url = require('url')
-var formBody = require('body/form')
-var Corsify = require('corsify')
 var S = require('pull-stream')
 var muxrpc = require('muxrpc')
 var ws = require('pull-ws/server')
@@ -15,34 +12,9 @@ if (require.main === module) start()
 function start () {
     var sbot = startSSB()
 
-    var server = http.createServer(Corsify(function onRequest (req, res) {
+    var server = http.createServer(function onRequest (req, res) {
         console.log('got request')
-
-        var path = url.parse(req.url).pathname
-        console.log('path', path)
-
-        if (path === '/post/publish') {
-            console.log('got post')
-
-            return formBody(req, function (err, body) {
-                if (err) {
-                    res.statusCode = 500
-                    return res.end()
-                }
-
-                console.log('aaaaa', body)
-                // var { file, description } = body
-
-                // console.log('body', body)
-                res.statusCode = 200
-                res.end('ok')
-            })
-        }
-
-        res.statusCode = 404
-        res.end()
-
-    })).listen(8000, function (err) {
+    }).listen(8000, function (err) {
         if (err) throw err
         console.log('listening on 8000')
     })
@@ -53,7 +25,6 @@ function start () {
 
             S(
                 S.once(Buffer.from(file)),
-                // S.through(data => console.log('arg', data)),
                 sbot.blobs.add(onBlobAdded)
             )
 
