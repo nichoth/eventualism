@@ -13,7 +13,19 @@ module.exports = function startSSB() {
     } = process.env
     console.log('env', SBOT_SHS, SBOT_SIGN, APP_NAME, NODE_ENV)
 
-    var config = ssbConfigInject(APP_NAME || undefined)
+    // use dev database
+    var appName = NODE_ENV === 'development' ? 'evt-DEV' : undefined
+    appName = APP_NAME ? APP_NAME : appName
+
+    var opts = {}
+    if (process.env.NODE_ENV === 'development') {
+        opts.caps = {
+            shs: SBOT_SHS,
+            sign: SBOT_SIGN
+        }
+    }
+
+    var config = ssbConfigInject(appName, opts)
     console.log('config', config)
 
     var keyPath = path.join(config.path, 'secret')
