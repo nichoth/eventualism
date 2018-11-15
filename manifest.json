@@ -95,6 +95,10 @@
       "unsubscribe": "sync",
       "stream": "source"
     }
+  },
+
+  "evt": {
+    "publishPost": "async"
   }
 }
 

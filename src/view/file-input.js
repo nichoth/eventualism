@@ -63,7 +63,9 @@ class FileInput extends Component {
         var { emit } = props
 
         return <div class="evt-file-input" id="evt-file-input">
-            <form onSubmit={emit(evs.submitNewPost)}>
+            <form enctype="multipart/form-data" method="post"
+                onSubmit={emit(evs.submitNewPost)}
+            >
                 <div className="form-group">
                     <input type="file" name="file" id="foo" multiple />
                 </div>

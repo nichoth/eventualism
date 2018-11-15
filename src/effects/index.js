@@ -1,5 +1,4 @@
 var S = require('pull-stream')
-// var xtend = require('xtend')
 var _connectSbot = require('./connect-sbot')
 function noop () {}
 
@@ -40,37 +39,57 @@ function Effects ({ state }) {
         // the message that references it. This means that there could
         // be bad state where we have a dangling blob with no post
         publishPost: function (sbot, post, cb) {
-            // file should be a source
-            cb = cb || noop
+            console.log('publishPost', post)
+
+            // xhr.post({
+            //     url: 'http://localhost:8000/post/publish',
+            //     body: post
+            // }, function (err, res, body) {
+            //     console.log('aaaaaaa', err, res, body)
+            // })
+
             var { file, description } = post
+            console.log('file', file)
+            console.log(file.toString())
 
-            S(
-                file,
-                // S.through(data => console.log('arg', data)),
-                sbot.blobs.add(onBlobAdded)
-            )
+            sbot.evt.publishPost({
+                file: file.toString(),
+                description
+            }, function (err, res) {
+                console.log('in here', err, res)
+            })
 
-            function onBlobAdded (err, fileId) {
-                console.log('here', arguments)
-                if (err) return cb(err)
+            // // file should be a source
+            // cb = cb || noop
+            // var { file, description } = post
 
-                sbot.publish({
-                    type: 'evt/post',
-                    fileData: fileId,
-                    description
-                }, function donePublishing (err, res) {
-                    if (err) {
-                        // @TODO can we delete the blob if this
-                        // fails? I guess that's naive. We would
-                        // want some kind of disk persisted store
-                        // of pending posts, so that we can do
-                        // atomic publishes
-                        return cb(err)
-                    }
+            // S(
+            //     file,
+            //     // S.through(data => console.log('arg', data)),
+            //     sbot.blobs.add(onBlobAdded)
+            // )
 
-                    cb(null, res)
-                })
-            }
+            // function onBlobAdded (err, fileId) {
+            //     console.log('here', arguments)
+            //     if (err) return cb(err)
+
+            //     sbot.publish({
+            //         type: 'evt/post',
+            //         fileData: fileId,
+            //         description
+            //     }, function donePublishing (err, res) {
+            //         if (err) {
+            //             // @TODO can we delete the blob if this
+            //             // fails? I guess that's naive. We would
+            //             // want some kind of disk persisted store
+            //             // of pending posts, so that we can do
+            //             // atomic publishes
+            //             return cb(err)
+            //         }
+
+            //         cb(null, res)
+            //     })
+            // }
         },
 
         getMessages: function (sbot) {
