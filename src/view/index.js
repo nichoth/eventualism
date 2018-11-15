@@ -1,5 +1,4 @@
 var { h } = require('preact')
-var FileInput = require('./file-input')
 var router = require('../router')
 
 function App (props) {
@@ -20,10 +19,12 @@ function App (props) {
         <div className="app-content">
             <Connection {...props} />
 
-            {props.sbotConnection.isConnected ?
-                <FileInput emit={emit} /> :
-                null
-            }
+            <nav>
+                <a href="/">Home</a>
+                <a href="/new">New</a>
+            </nav>
+
+            <hr />
 
             <RouteView {...routeState} emit={emit} />
         </div>

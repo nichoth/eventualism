@@ -1,5 +1,6 @@
 @import "../../node_modules/\@uppy/core/dist/style";
-@import "../../node_modules/\@uppy/file-input/dist/style";
+// @import "../../node_modules/\@uppy/file-input/dist/style";
+@import "../../node_modules/\@uppy/dashboard/dist/style";
 
 body {
 }
@@ -15,5 +16,18 @@ body {
         padding: 1em;
         margin-bottom: 1em;
     }
+}
+
+nav {
+    margin-bottom: 1em;
+
+    a {
+        margin-right: 1em;
+    }
+}
+
+// forms
+.form-group {
+    margin-bottom: 1em;
 }
 

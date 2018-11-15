@@ -46,27 +46,31 @@ function Effects ({ state }) {
 
             S(
                 file,
-                sbot.blobs.add(function onBlobAdded (err, fileId) {
-                    if (err) return cb(err)
-
-                    sbot.publish({
-                        type: 'evt/post',
-                        fileData: fileId,
-                        description
-                    }, function donePublishing (err, res) {
-                        if (err) {
-                            // @TODO can we delete the blob if this
-                            // fails? I guess that's naive. We would
-                            // want some kind of disk persisted store
-                            // of pending posts, so that we can do
-                            // atomic publishes
-                            return cb(err)
-                        }
-
-                        cb(null, res)
-                    })
-                })
+                // S.through(data => console.log('arg', data)),
+                sbot.blobs.add(onBlobAdded)
             )
+
+            function onBlobAdded (err, fileId) {
+                console.log('here', arguments)
+                if (err) return cb(err)
+
+                sbot.publish({
+                    type: 'evt/post',
+                    fileData: fileId,
+                    description
+                }, function donePublishing (err, res) {
+                    if (err) {
+                        // @TODO can we delete the blob if this
+                        // fails? I guess that's naive. We would
+                        // want some kind of disk persisted store
+                        // of pending posts, so that we can do
+                        // atomic publishes
+                        return cb(err)
+                    }
+
+                    cb(null, res)
+                })
+            }
         },
 
         getMessages: function (sbot) {

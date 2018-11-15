@@ -1,4 +1,6 @@
+// require('dotenv').config()
 var test = require('tape')
+// var Sbot = require('../server/start-ssb')
 var Sbot = require('scuttle-testbot')
     .use(require('ssb-blobs'))
 var fs = require('fs')

@@ -12,7 +12,9 @@ function createState () {
 
         messages: struct({
             data: observ([])
-        })
+        }),
+
+        newPost: struct({})
     })
 
     return state

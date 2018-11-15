@@ -1,8 +1,7 @@
 var namespace = require('@nichoth/events/namespace')
 
 var EVENTS = namespace({
-    hello: ['world'],
-    post: ['addFile']
+    post: ['addFile', 'submitNewPost']
 })
 
 module.exports = EVENTS

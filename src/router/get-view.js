@@ -5,6 +5,7 @@ function GetView () {
     var router = Router()
 
     router.addRoute('/', Home)
+    router.addRoute('/new', require('../view/routes/new'))
 
     return function getView (pathname) {
         var match = router.match(pathname)

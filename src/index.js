@@ -1,4 +1,5 @@
 var { h, render } = require('preact')
+var S = require('pull-stream')
 var connect = require('@nichoth/preact-connect')
 var catchRoutes = require('@nichoth/catch-routes')
 var Bus = require('@nichoth/events')
@@ -13,11 +14,11 @@ var bus = Bus({ memo: true })
 catchRoutes(parsedUrl => state.route.set(parsedUrl))
 
 var effects = Effects({ state })
-subscribeToView({ effects, view: bus })
 var _view = connect({ state, bus, view: View })
 render(h(_view), document.getElementById('content'))
 
 if (process.env.NODE_ENV === 'development') {
+    window.S = S
     window.app = {
         state,
         effects,
@@ -28,10 +29,8 @@ if (process.env.NODE_ENV === 'development') {
 
 effects.connectSbot(function (err, sbot) {
     if (err) return
-    sbot.whoami(function (err, res) {
-        console.log('whoami', err, res)
-    })
-
+    if (process.env.NODE_ENV === 'development') window.sbot = sbot
+    subscribeToView({ sbot, effects, view: bus })
     effects.getMessages(sbot)
 })
 

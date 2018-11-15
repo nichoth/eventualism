@@ -9,6 +9,8 @@ function SelectState () {
         }
     })
 
+    router.addRoute('/new', state => state.newPost)
+
     return function selectState (state, pathname) {
         var match = router.match(pathname)
         if (!match) return null

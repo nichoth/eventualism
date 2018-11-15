@@ -19,10 +19,10 @@ module.exports = function startSSB() {
 
     var opts = {}
     if (process.env.NODE_ENV === 'development') {
-        opts.caps = {
-            shs: SBOT_SHS,
-            sign: SBOT_SIGN
-        }
+        // opts.caps = {
+        //     shs: SBOT_SHS,
+        //     sign: SBOT_SIGN
+        // }
     }
 
     var config = ssbConfigInject(appName, opts)
