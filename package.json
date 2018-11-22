@@ -28,7 +28,7 @@
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
-    "test": "tape test/{**/*,*}.js",
+    "test": "node test/index.js",
     "test-browser": "browserify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html"
   },
   "dependencies": {

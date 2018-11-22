@@ -44,6 +44,7 @@ function Effects ({ state }) {
             }, function (err, res) {
                 console.log('in here', err, res)
                 // @TODO update state
+                cb(err, res)
             })
         },
 

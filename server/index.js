@@ -5,6 +5,7 @@ var muxrpc = require('muxrpc')
 var ws = require('pull-ws/server')
 var manifest = require('../manifest.json')
 var startSSB = require('./start-ssb')
+var patchSbot = require('./patch-sbot')
 
 // if we are running this as CLI, not as a module
 if (require.main === module) start()
@@ -19,38 +20,7 @@ function start () {
         console.log('listening on 8000')
     })
 
-    sbot.evt = {
-        publishPost: function (post, cb) {
-            var { file, description } = post
-
-            S(
-                S.once(Buffer.from(file)),
-                sbot.blobs.add(onBlobAdded)
-            )
-
-            function onBlobAdded (err, fileId) {
-                console.log('blob added', arguments)
-                if (err) return cb(err)
-
-                sbot.publish({
-                    type: 'evt/post',
-                    fileData: fileId,
-                    description
-                }, function donePublishing (err, res) {
-                    if (err) {
-                        // @TODO can we delete the blob if this
-                        // fails? I guess that's naive. We would
-                        // want some kind of disk persisted store
-                        // of pending posts, so that we can do
-                        // atomic publishes
-                        return cb(err)
-                    }
-
-                    cb(null, res)
-                })
-            }
-        }
-    }
+    patchSbot(sbot)
 
     ws({ server }, function onConnection (wsStream) {
         console.log('got ws connection')

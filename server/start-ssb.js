@@ -4,7 +4,7 @@ var path = require('path')
 var sbot = require('scuttlebot')
 
 // @TODO check if global sbot is running and use that if possible
-module.exports = function startSSB() {
+module.exports = function startSSB () {
     var {
         SBOT_SHS,
         SBOT_SIGN,
