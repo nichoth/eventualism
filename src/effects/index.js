@@ -57,7 +57,6 @@ function Effects ({ state }) {
                     getBlobFromMessage(sbot, msg, function (err, buf) {
                         if (err) return cb(err)
                         msg.value.content.fileBlob = buf
-                        // msg.value.content.fileBlob = buf.toString('base64')
                         cb(null, msg)
                     })
                 }),
@@ -87,11 +86,6 @@ function getBlobFromMessage (sbot, msg, cb) {
         sbot.blobs.get(link),
         S.collect(function (err, bufs) {
             if (err) return cb(err)
-            // console.log('aaaaaa', bufs)
-            // console.log('here', Buffer.concat(bufs))
-            // console.log('foo blab', toBuffer(Buffer.concat(bufs)))
-            // console.log(Buffer.concat(bufs).toString('base64'))
-            // console.log(Buffer.concat(bufs).toString())
             cb(null, Buffer.concat(bufs))
         })
     )

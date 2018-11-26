@@ -1,8 +1,12 @@
-@import "../../node_modules/\@uppy/core/dist/style";
+// @import "../../node_modules/\@uppy/core/dist/style";
 // @import "../../node_modules/\@uppy/file-input/dist/style";
-@import "../../node_modules/\@uppy/dashboard/dist/style";
+// @import "../../node_modules/\@uppy/dashboard/dist/style";
 
 body {
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
 
 .main-feed {
