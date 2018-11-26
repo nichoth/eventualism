@@ -7,12 +7,11 @@ function patch (sbot) {
             var { file, description } = post
 
             S(
-                S.once(Buffer.from(file)),
+                S.once(Buffer.from(file, 'base64')),
                 sbot.blobs.add(onBlobAdded)
             )
 
             function onBlobAdded (err, fileId) {
-                console.log('blob added', arguments)
                 if (err) return cb(err)
 
                 sbot.publish({

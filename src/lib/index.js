@@ -12,6 +12,16 @@ module.exports = {
     observ: require('@nichoth/observ/observ'),
     struct: require('@nichoth/observ/struct'),
     Model: require('@nichoth/observ/model'),
-    messages
+    messages,
+    isPost
 }
 
+function isPost (msg) {
+    var _isPost
+    try {
+        _isPost = msg.value.content.type === 'evt/post'
+    } catch (err) {
+        _isPost = false
+    }
+    return _isPost
+}

@@ -59,7 +59,7 @@ class FileInput extends Component {
     }
 
     render (props) {
-        console.log('fileInput render', props)
+        // console.log('fileInput render', props)
         var { emit } = props
 
         return <div class="evt-file-input" id="evt-file-input">

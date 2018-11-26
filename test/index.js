@@ -8,7 +8,7 @@ var sbot
 test('setup', function (t) {
     sbot = patchSbot(Sbot())
 
-    require('./publish')({ sbot, test: t.test })
+    require('./post')({ sbot, test: t.test })
     require('./rpc')({ sbot, test: t.test })
 })
 
