@@ -6,6 +6,7 @@ function GetView () {
 
     router.addRoute('/', Home)
     router.addRoute('/new', require('../view/routes/new'))
+    router.addRoute('/post/:key', require('../view/routes/post'))
 
     return function getView (pathname) {
         var match = router.match(pathname)

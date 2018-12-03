@@ -14,6 +14,10 @@ function createState () {
             data: observ([])
         }),
 
+        postDetail: struct({
+            message: struct({})
+        }),
+
         newPost: struct({})
     })
 

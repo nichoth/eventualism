@@ -10,6 +10,7 @@ function SelectState () {
     })
 
     router.addRoute('/new', state => state.newPost)
+    router.addRoute('/post/:key', state => state.postDetail)
 
     return function selectState (state, pathname) {
         var match = router.match(pathname)

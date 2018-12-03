@@ -1,5 +1,6 @@
 require('dotenv').config()
 var http = require('http')
+var url = require('url')
 var S = require('pull-stream')
 var muxrpc = require('muxrpc')
 var ws = require('pull-ws/server')
@@ -15,6 +16,8 @@ function start () {
 
     var server = http.createServer(function onRequest (req, res) {
         console.log('got request')
+        var { pathname } = url.parse(req.url)
+        console.log('req pathname', pathname)
     }).listen(8000, function (err) {
         if (err) throw err
         console.log('listening on 8000')

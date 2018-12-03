@@ -1,5 +1,5 @@
 var { h } = require('preact')
-var { isPost } = require('../../lib')
+var { PostMedia } = require('../components')
 
 function Home (match) {
     return function HomeView (props) {
@@ -13,25 +13,13 @@ function Home (match) {
                             {msg.value.content.type}
                         </div>
 
-                        <PostMedia msg={msg} />
+                        <PostMedia msg={msg} href={'/post/' +
+                            window.encodeURIComponent(msg.key)} />
                     </div>
                 })}
             </div>
         </div>
     }
-}
-
-function PostMedia ({ msg }) {
-    if (!isPost(msg)) return null
-    var { description, fileBlob } = msg.value.content
-    var blob = new window.Blob([fileBlob.buffer], {
-        type: 'image/jpeg'
-    })
-    var imgUrl = window.URL.createObjectURL(blob)
-
-    return <div class="post-media">
-        <img src={imgUrl} alt={description} />
-    </div>
 }
 
 module.exports = Home

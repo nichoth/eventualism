@@ -1,6 +1,6 @@
 {
   "name": "eventualism",
-  "description": "## start Start a local development server",
+  "description": "ssb image app",
   "version": "0.0.0",
   "main": "index.js",
   "directories": {

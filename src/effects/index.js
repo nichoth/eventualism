@@ -26,7 +26,6 @@ function Effects ({ state }) {
                     return sbotConnection.error.set(true)
                 }
 
-                console.log('got ws sbot')
                 sbotConnection.isConnected.set(true)
                 cb(null, sbot)
             })

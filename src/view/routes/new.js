@@ -6,6 +6,16 @@ class New extends Component {
         super(props)
     }
 
+    // @TODO
+    // * [ ] show preview image after you select a file
+    //
+    //    _________
+    //   [         ]  | Words go here
+    //   | picture |  |
+    //   |         |  |
+    //    ---------
+    //
+
     render (props) {
         return <div class="new-post">
             <FileInput emit={props.emit} />
