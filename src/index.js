@@ -10,6 +10,23 @@ var { createState } = require('./state')
 var View = require('./view')
 var evs = require('./EVENTS')
 
+
+// @TODO
+// * [ ] preview of image file
+// * [ ] show visual feedback when you submit the form for new posts
+// * [ ] post/:key route -- ask sbot for the image if it's not in memory
+// * [ ] navigation -- sticky bar type thing at the top with links & buttons
+// * [ ] live updates from the message feed, where we get the initial list.
+//      This should probably have a 'notification' type of thing with
+//      a button to show new posts
+// * [ ] should check if sbot is already running and use that if possible
+// * [ ] route to view your profile
+// * [ ] route to see another account's pictures
+// * [ ] view of followers and friends and stuff
+// * [ ] view for metadata -- 'likes'
+// * [ ] button to bookmark or like other peoples' posts
+
+
 var state = createState()
 var routeEffects = RouteEffects({ state })
 var bus = Bus({ memo: true })
