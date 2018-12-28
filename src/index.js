@@ -12,6 +12,7 @@ var evs = require('./EVENTS')
 
 
 // @TODO
+// * [ ] button and api method to 'follow' someone
 // * [ ] test that gossip is ok
 // * [ ] e2e test with cypress
 // * [ ] preview of image file
@@ -56,6 +57,6 @@ effects.connectSbot(function (err, sbot) {
     if (err) return
     if (process.env.NODE_ENV === 'development') window.sbot = sbot
     subscribeToView({ sbot, effects, view: bus })
-    effects.getMessages(sbot)
+    effects.getPosts(sbot)
 })
 

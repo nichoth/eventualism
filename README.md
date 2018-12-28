@@ -1,4 +1,7 @@
 # eventualism 
+[![Build Status](https://travis-ci.com/nichoth/eventualism.svg?branch=master)](https://travis-ci.com/nichoth/eventualism)
+
+Trying things with ssb
 
 ## start
 Start a local development server

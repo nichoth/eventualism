@@ -10,6 +10,7 @@ test('setup', function (t) {
 
     require('./post')({ sbot, test: t.test })
     require('./rpc')({ sbot, test: t.test })
+    // require('./gossip')({ sbot, test: t.test })
 })
 
 test('close', function (t) {

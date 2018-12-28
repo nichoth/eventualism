@@ -2,7 +2,16 @@ var { h } = require('preact')
 var { isPost } = require('../../lib')
 
 module.exports = {
-    PostMedia
+    PostMedia,
+    BgImage
+}
+
+function BgImage (props) {
+    return <div className="bg-image" style={{
+        backgroundImage: 'url(' + props.src + ')'
+    }}>
+        {props.children}
+    </div>
 }
 
 function PostMedia ({ msg, href }) {
@@ -22,5 +31,7 @@ function PostMedia ({ msg, href }) {
         }
     </div>
 }
+
+
 
 

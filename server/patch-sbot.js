@@ -1,4 +1,5 @@
 var S = require('pull-stream')
+var types = require('../message-types')
 
 // add our app methods
 function patch (sbot) {
@@ -15,7 +16,7 @@ function patch (sbot) {
                 if (err) return cb(err)
 
                 sbot.publish({
-                    type: 'evt/post',
+                    type: types.post,
                     fileData: fileId,
                     description
                 }, function donePublishing (err, res) {
