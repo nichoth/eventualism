@@ -13,7 +13,6 @@ function PostMedia ({ msg, href }) {
     })
     var imgUrl = window.URL.createObjectURL(blob)
 
-
     return <div class="post-media">
         {href ?
             <a href={href}>

@@ -18,7 +18,8 @@ function createState () {
             message: struct({})
         }),
 
-        newPost: struct({})
+        newPost: struct({
+        })
     })
 
     return state

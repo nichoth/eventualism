@@ -22,6 +22,7 @@ function App (props) {
             <nav>
                 <a href="/">Home</a>
                 <a href="/new">New</a>
+                <a href="/me">Profile</a>
             </nav>
 
             <hr />

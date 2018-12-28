@@ -1,0 +1,11 @@
+#content.drag::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(248,40,59,0.3);
+    border: 5px #f8283b dashed;
+}
+
