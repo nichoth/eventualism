@@ -5,7 +5,6 @@ var { PostMedia } = require('../components')
 //     {msg.value.content.type}
 // </div>
 
-
 function Home (match) {
     return function HomeView (props) {
         var { messages } = props
@@ -22,6 +21,8 @@ function Home (match) {
         </div>
     }
 }
+
+
 
 module.exports = Home
 

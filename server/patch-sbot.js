@@ -1,5 +1,5 @@
 var S = require('pull-stream')
-var types = require('../message-types')
+var types = require('../src/message-types')
 
 // add our app methods
 function patch (sbot) {
