@@ -1,5 +1,19 @@
 $colorPrimary: cornflowerblue;
 
+.new-post {
+    .evt-file-input {
+        display: flex;
+    }
+
+    .pending-file-placeholder, .pending-file-preview {
+        margin-right: 1em;
+    }
+
+    form {
+        width: 50%;
+    }
+}
+
 #content.drag::before {
     content: '';
     position: fixed;
@@ -53,4 +67,6 @@ $colorPrimary: cornflowerblue;
         }
     }
 }
+
+
 
