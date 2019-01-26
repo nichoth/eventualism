@@ -10,8 +10,6 @@ function PostRouteView (props) {
     var { message } = props
 
     return <div className="route-post">
-        post view
-
         <PostMedia msg={message} />
     </div>
 }
