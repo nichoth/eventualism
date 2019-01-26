@@ -44,48 +44,9 @@ function NewPostRoute (match) {
 module.exports = NewPostRoute
 
 
-// emit
 class FileInput extends Component {
     constructor (props) {
         super(props)
-    }
-
-    // shouldComponentUpdate () {
-    //     // return false
-    // }
-
-    componentDidMount () {
-        // var el = document.getElementById('evt-file-input')
-
-        // var uppy = Uppy({
-        //     autoProceed: false,
-        //     debug: true,
-        //     // onBeforeFileAdded: function () {
-        //     //     console.log('here', arguments)
-        //     // }
-        // })
-
-        // uppy.on('file-added', this.props.emit(evs.addFile))
-        // uppy.on('complete', this.props.emit(evs.addFile))
-
-        // dashboard
-        // uppy.use(Dashboard, {
-        //     inline: true,
-        //     target: el,
-        //     replaceTargetContent: true,
-        //     showProgressDetails: true
-        // })
-
-        // uppy.use(UppyFileInput, {
-        //     target: el,
-        //     pretty: true,
-        //     inputName: 'file',
-        //     replaceTargetContent: true
-        // })
-
-        // uppy.use(ThumbnailGenerator, {
-        //     thumbnailWidth: 200
-        // })
     }
 
     render (props) {
