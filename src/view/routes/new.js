@@ -1,5 +1,6 @@
 var { h, Component } = require('preact')
 var dragDrop = require('drag-drop/buffer')
+var { BufferImage } = require('../components')
 var evs = require('../../EVENTS').post
 
 class NewPost extends Component {
@@ -8,12 +9,8 @@ class NewPost extends Component {
     }
 
     componentDidMount () {
-        this._unsubscribe = dragDrop('#content', function (files) {
-            // files are buffers here
-            files.forEach(function (file) {
-                console.log('dropped file', file)
-            })
-        })
+        var { emit } = this.props
+        this._unsubscribe = dragDrop('#content', emit(evs.fileDropped))
     }
 
     componentWillUnmount () {
@@ -31,7 +28,15 @@ class NewPost extends Component {
     //
 
     render (props) {
+        var { pendingFiles } = props
+
         return <div class="new-post">
+            {props.pendingFiles.length ?
+                <div class="pending-file-preview">
+                    <BufferImage buffer={pendingFiles[0]} />
+                </div> :
+                null
+            }
             <FileInput emit={props.emit} />
         </div>
     }
@@ -48,7 +53,6 @@ module.exports = NewPostRoute
 class FileInput extends Component {
     constructor (props) {
         super(props)
-        this.onFormInput = this.onFormInput.bind(this)
     }
 
     shouldComponentUpdate () {
@@ -89,10 +93,6 @@ class FileInput extends Component {
         // })
     }
 
-    onFormInput (ev) {
-        console.log('input', ev.target.files)
-    }
-
     render (props) {
         // console.log('fileInput render', props)
         var { emit } = props
@@ -100,7 +100,7 @@ class FileInput extends Component {
         return <div class="evt-file-input" id="evt-file-input">
             <form enctype="multipart/form-data" method="post"
                 onSubmit={emit(evs.submitNewPost)}
-                onInput={this.onFormInput}
+                onInput={emit(evs.fileAdded)}
             >
                 <div className="form-group">
                     <input type="file" name="file" multiple />

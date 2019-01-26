@@ -44,6 +44,11 @@ function Effects ({ state }) {
             })
         },
 
+        addPendingFile: function (file) {
+            var { pendingFiles } = state.newPost
+            pendingFiles.set(pendingFiles().concat([file]))
+        },
+
         getPosts: function (sbot) {
             S(
                 sbot.messagesByType({

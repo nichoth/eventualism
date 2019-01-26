@@ -4,6 +4,15 @@ var fileReaderStream = require('pull-file-reader')
 var { post } = require('../EVENTS')
 
 function subscribeToView ({ sbot, effects, view }) {
+    view
+        .on(post.fileAdded, function (ev) {
+            console.log('fileAdded', ev)
+            effects.addPendingFile(ev.target.files[0])
+        })
+        .on(post.fileDropped, function (files) {
+            effects.addPendingFile(files[0])
+        })
+
     view.on(post.submitNewPost, function (ev) {
         preventDefault(ev)
         console.log('submit new post', ev)

@@ -19,6 +19,7 @@ function createState () {
         }),
 
         newPost: struct({
+            pendingFiles: observ([])
         })
     })
 

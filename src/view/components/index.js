@@ -3,6 +3,7 @@ var { isPost } = require('../../lib')
 
 module.exports = {
     PostMedia,
+    BufferImage,
     BgImage
 }
 
@@ -11,6 +12,22 @@ function BgImage (props) {
         backgroundImage: 'url(' + props.src + ')'
     }}>
         {props.children}
+    </div>
+}
+
+function BufferImage ({ buffer, href, alt }) {
+    var blob = new window.Blob([buffer], {
+        type: 'image/jpeg'
+    })
+    var imgUrl = window.URL.createObjectURL(blob)
+
+    return <div class="buffer-image">
+        {href ?
+            <a href={href}>
+                <img src={imgUrl} alt={alt} />
+            </a> :
+            <img src={imgUrl} alt={alt} />
+        }
     </div>
 }
 
