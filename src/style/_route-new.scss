@@ -1,3 +1,5 @@
+$colorPrimary: cornflowerblue;
+
 #content.drag::before {
     content: '';
     position: fixed;
@@ -7,5 +9,29 @@
     right: 0;
     background: rgba(248,40,59,0.3);
     border: 5px #f8283b dashed;
+}
+
+.post-caption-input {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border-radius: $borderRadius;
+    border-color: gray;
+    background-color: whitesmoke;
+    font-size: 1em;
+    padding: 0.25em 0.5em;
+
+    &:focus {
+        border-color: $colorPrimary;
+        outline-width: 2px;
+        background-color: lighten(whitesmoke, 2%);
+    }
+}
+
+.pending-file-placeholder {
+    height: 50vh;
+    background-color: lightgray;
+    margin-bottom: 0.5em;
+    width: 50%;
 }
 

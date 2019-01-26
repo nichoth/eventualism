@@ -31,13 +31,8 @@ class NewPost extends Component {
         var { pendingFiles } = props
 
         return <div class="new-post">
-            {props.pendingFiles.length ?
-                <div class="pending-file-preview">
-                    <BufferImage buffer={pendingFiles[0]} />
-                </div> :
-                null
-            }
-            <FileInput emit={props.emit} />
+            <FileInput emit={props.emit} disabled={!pendingFiles.length}
+                {...props} />
         </div>
     }
 }
@@ -95,22 +90,35 @@ class FileInput extends Component {
 
     render (props) {
         // console.log('fileInput render', props)
-        var { emit } = props
+        var { emit, pendingFiles } = props
 
         return <div class="evt-file-input" id="evt-file-input">
+            {props.pendingFiles.length ?
+                <div class="pending-file-preview">
+                    <BufferImage buffer={pendingFiles[0]} />
+                </div> :
+                <div class="pending-file-placeholder" />
+            }
+
             <form enctype="multipart/form-data" method="post"
                 onSubmit={emit(evs.submitNewPost)}
-                onInput={emit(evs.fileAdded)}
             >
                 <div className="form-group">
-                    <input type="file" name="file" multiple />
+                    <input type="file" name="file" multiple
+                        onInput={emit(evs.fileAdded)} />
                 </div>
 
                 <div className="form-group">
-                    <textarea name="description" cols="30" rows="10" />
+                    <textarea className="post-caption-input"
+                        name="description"
+                        onInput={emit(evs.captionChange)} />
                 </div>
 
-                <button type="submit">Submit</button>
+                <div class="form-controls">
+                    <button type="submit" disabled={props.disabled}>
+                        Create post
+                    </button>
+                </div>
             </form>
         </div>
     }

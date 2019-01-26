@@ -2,7 +2,20 @@
 // @import "../../node_modules/\@uppy/file-input/dist/style";
 // @import "../../node_modules/\@uppy/dashboard/dist/style";
 
+$borderRadius: 3px;
+
 @import "./_route-new";
+
+button {
+    cursor: pointer;
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.form-controls {
+    text-align: right;
+}
 
 body {
     font-family: "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

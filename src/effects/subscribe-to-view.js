@@ -12,6 +12,10 @@ function subscribeToView ({ sbot, effects, view }) {
         .on(post.fileDropped, function (files) {
             effects.addPendingFile(files[0])
         })
+        .on(post.captionChange, function (ev) {
+            // console.log('caption change')
+            // i guess we don't need this right now
+        })
 
     view.on(post.submitNewPost, function (ev) {
         preventDefault(ev)
