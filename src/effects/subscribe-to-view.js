@@ -16,6 +16,10 @@ function subscribeToView ({ sbot, effects, view }) {
             // console.log('caption change')
             // i guess we don't need this right now
         })
+        .on(post.resetForm, function (ev) {
+            ev.preventDefault()
+            effects.rmPendingFiles()
+        })
 
     view.on(post.submitNewPost, function (ev) {
         preventDefault(ev)

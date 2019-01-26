@@ -50,9 +50,9 @@ class FileInput extends Component {
         super(props)
     }
 
-    shouldComponentUpdate () {
-        return false
-    }
+    // shouldComponentUpdate () {
+    //     // return false
+    // }
 
     componentDidMount () {
         // var el = document.getElementById('evt-file-input')
@@ -89,7 +89,6 @@ class FileInput extends Component {
     }
 
     render (props) {
-        // console.log('fileInput render', props)
         var { emit, pendingFiles } = props
 
         return <div class="evt-file-input" id="evt-file-input">
@@ -115,6 +114,12 @@ class FileInput extends Component {
                 </div>
 
                 <div class="form-controls">
+                    <button disabled={props.disabled}
+                        onClick={emit(evs.resetForm)}
+                    >
+                        Cancel
+                    </button>
+
                     <button type="submit" disabled={props.disabled}>
                         Create post
                     </button>
