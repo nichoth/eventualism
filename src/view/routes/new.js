@@ -1,6 +1,6 @@
 var { h, Component } = require('preact')
 var dragDrop = require('drag-drop/buffer')
-var { BufferImage } = require('../components')
+var { BufferImage, FormGroup, FormControls } = require('../components')
 var evs = require('../../EVENTS').post
 
 class NewPost extends Component {
@@ -63,18 +63,18 @@ class FileInput extends Component {
             <form enctype="multipart/form-data" method="post"
                 onSubmit={emit(evs.submitNewPost)}
             >
-                <div className="form-group">
+                <FormGroup>
                     <input type="file" name="file" multiple
                         onInput={emit(evs.fileAdded)} />
-                </div>
+                </FormGroup>
 
-                <div className="form-group">
+                <FormGroup>
                     <textarea className="post-caption-input"
                         name="description"
                         onInput={emit(evs.captionChange)} />
-                </div>
+                </FormGroup>
 
-                <div class="form-controls">
+                <FormControls>
                     <button disabled={props.disabled}
                         onClick={emit(evs.resetForm)}
                     >
@@ -84,9 +84,12 @@ class FileInput extends Component {
                     <button type="submit" disabled={props.disabled}>
                         Create post
                     </button>
-                </div>
+                </FormControls>
+
             </form>
         </div>
     }
 }
+
+
 

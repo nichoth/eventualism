@@ -1,10 +1,34 @@
 var { h } = require('preact')
+var { combineClasses } = require('../util')
 var { isPost } = require('../../lib')
 
 module.exports = {
     PostMedia,
     BufferImage,
-    BgImage
+    BgImage,
+    FormGroup,
+    FormControls,
+    Button
+}
+
+function Button (props) {
+    return <button {...props}
+        class={combineClasses('evt-btn', props.class)}
+    >
+        {props.children}
+    </button>
+}
+
+function FormControls (props) {
+    return <div class="form-controls">
+        {props.children}
+    </div>
+}
+
+function FormGroup (props) {
+    return <div className="form-group">
+        {props.children}
+    </div>
 }
 
 function BgImage (props) {
