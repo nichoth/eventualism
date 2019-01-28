@@ -4,6 +4,16 @@ var types = require('../src/message-types')
 // add our app methods
 function patch (sbot) {
     sbot.evt = {
+        saveBlob: function (blob, cb) {
+            S(
+                S.once(Buffer.from(blob, 'base64')),
+                sbot.blobs.add(function (err, fileId) {
+                    if (err) return cb(err)
+                    cb(null, fileId)
+                })
+            )
+        },
+
         publishPost: function (post, cb) {
             var { file, description } = post
 

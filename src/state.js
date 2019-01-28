@@ -20,13 +20,37 @@ function createState () {
 
         newPost: struct({
             pendingFiles: observ([])
+        }),
+
+        profile: Profile(),
+
+        whoami: struct({
+            error: observ(null),
+            data: struct({})
         })
     })
 
     return state
 }
 
+function Profile () {
+    return struct({
+        error: observ(null),
+        data: struct({}),
+        pendingChanges: struct({
+            image: struct({}),
+            username: observ(null)
+        })
+    })
+}
+
+Profile.clearChanges = function (state) {
+    state.pendingChanges.image.set({})
+    state.pendingChanges.username.set(null)
+}
+
 module.exports = {
-    createState
+    createState,
+    Profile
 }
 

@@ -1,7 +1,20 @@
 var Routes = require('ruta3')
 
-function RouteEffects ({ state }) {
+function RouteEffects ({ state, effects, getSbot }) {
     var router = Routes()
+
+    router.addRoute('/me', function ({ params }) {
+        getSbot(function (err, sbot) {
+            if (err) throw err
+            var id = state.whoami.data().id
+            if (id) return effects.getProfile(sbot, id)
+            sbot.whoami(function (err, res) {
+                if (err) return state.whoami.error.set(err)
+                state.whoami.data.set(res)
+                effects.getProfile(sbot, res.id)
+            })
+        })
+    })
 
     router.addRoute('/post/:key', function ({ params }) {
         var msgs = state.messages.data()

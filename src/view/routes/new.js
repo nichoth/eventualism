@@ -1,9 +1,10 @@
 var { h, Component } = require('preact')
 var dragDrop = require('drag-drop/buffer')
 var { BufferImage, FormGroup, FormControls } = require('../components')
+var { PureComponent } = require('../util')
 var evs = require('../../EVENTS').post
 
-class NewPost extends Component {
+class NewPost extends PureComponent {
     constructor (props) {
         super(props)
     }
@@ -16,16 +17,6 @@ class NewPost extends Component {
     componentWillUnmount () {
         this._unsubscribe()
     }
-
-    // @TODO
-    // * [ ] show preview image after you select a file
-    //
-    //    _________
-    //   [         ]  | Words go here
-    //   | picture |  |
-    //   |         |  |
-    //    ---------
-    //
 
     render (props) {
         var { pendingFiles } = props
@@ -90,6 +81,5 @@ class FileInput extends Component {
         </div>
     }
 }
-
 
 

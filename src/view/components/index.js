@@ -8,7 +8,13 @@ module.exports = {
     BgImage,
     FormGroup,
     FormControls,
-    Button
+    Button,
+    Input
+}
+
+function Input (props) {
+    return <input class={combineClasses('evt-input', props.class)}
+        type="text" {...props} />
 }
 
 function Button (props) {

@@ -1,9 +1,11 @@
 var { Buffer } = require('buffer')
 var S = require('pull-stream')
 var fileReaderStream = require('pull-file-reader')
-var { post } = require('../EVENTS')
+var { post, profile } = require('../EVENTS')
 
-function subscribeToView ({ sbot, effects, view }) {
+function subscribeToView ({ sbot, effects, view, state }) {
+
+    // new post
     view
         .on(post.fileAdded, function (ev) {
             console.log('fileAdded', ev)
@@ -21,29 +23,67 @@ function subscribeToView ({ sbot, effects, view }) {
             effects.rmPendingFiles()
         })
 
-    view.on(post.submitNewPost, function (ev) {
-        preventDefault(ev)
-        console.log('submit new post', ev)
+        .on(post.submitNewPost, function (ev) {
+            preventDefault(ev)
+            var files = ev.target.file.files
+            var description = ev.target.elements.description.value
 
-        var files = ev.target.file.files
-        console.log('files', files)
-        var description = ev.target.elements.description.value
+            readFile(files[0], function (err, file) {
+                if (err) return console.warn('err', err)
+                var post = { file, description }
 
-        S( fileReaderStream(files[0]), S.collect(function (err, bufs) {
-            // @TODO set state here for the error
-            if (err) return console.log('err', err)
+                effects.publishPost(sbot, post, function (err, res) {
+                    // don't need to do anything here. state is set in
+                    // effects
+                    console.log('wooooo publish', err, res)
+                })
+            })
+        })
 
-            var post = {
-                file: Buffer.concat(bufs),
-                description
+    // profile
+    view
+        .on(profile.submit, function (ev) {
+            ev.preventDefault()
+            console.log('submit', ev)
+            var file = ev.target.elements.avatar.files[0]
+            var username = ev.target.elements.username.value
+            console.log('submit profile', file, username)
+
+            var url = window.URL.createObjectURL(file)
+            var img = new window.Image()
+            img.onload = function () {
+                var imageData = {
+                    size: file.size,
+                    type: file.type,
+                    name: file.name,
+                    width: img.width,
+                    height: img.height
+                }
+
+                readFile(file, function (err, buf) {
+                    if (err) return console.warn('err', err)
+                    effects.updateProfile(sbot, {
+                        file: buf,
+                        imageData,
+                        username
+                    })
+                })
             }
 
-            effects.publishPost(sbot, post, function (err, res) {
-                // don't need to do anything here. state is set in effects
-                console.log('wooooo publish', err, res)
+            img.src = url
+        })
+
+        .on(profile.selectAvatar, function (file) {
+            console.log('selectAvatar', file)
+            var { profile } = state
+
+            profile.pendingChanges.image.set({
+                size: file.size,
+                type: file.type,
+                name: file.name
             })
-        }) )
-    })
+        })
+
 }
 
 function preventDefault (ev) {
@@ -52,6 +92,16 @@ function preventDefault (ev) {
     } catch (err) {
         // ok
     }
+}
+
+function readFile (file, cb) {
+    S(
+        fileReaderStream(file),
+        S.collect(function (err, bufs) {
+            if (err) return cb(err)
+            cb(null, Buffer.concat(bufs))
+        })
+    )
 }
 
 module.exports = subscribeToView

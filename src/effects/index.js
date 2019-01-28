@@ -1,6 +1,8 @@
 var { Buffer } = require('buffer')
 var S = require('pull-stream')
+var xtend = require('xtend')
 var ssbMsgs = require('ssb-msgs')
+var { Profile } = require('../state')
 var types = require('../message-types')
 var { isPost } = require('../lib')
 var _connectSbot = require('./connect-sbot')
@@ -84,7 +86,62 @@ function Effects ({ state }) {
                     state.messages.data.set(msgs)
                 })
             )
+        },
+
+        updateProfile: function (sbot, { imageData, file, username }) {
+            var id = state.whoami.data().id
+            if (id) return _updateProfile({ id })
+
+            sbot.whoami(function (err, res) {
+                if (err) return state.whoami.error.set(err)
+                state.whoami.data.set(res)
+                _updateProfile({ id })
+            })
+
+            function _updateProfile ({ id }) {
+                sbot.evt.saveBlob(file.toString('base64'),
+                    function (err, fileId) {
+                        if (err) return console.log('err', err)
+
+                        sbot.publish({
+                            type: 'about',
+                            about: id,
+                            image: xtend(imageData, {
+                                link: fileId
+                            })
+                        }, function (err, res) {
+                            console.log('here', err, res)
+                            Profile.clearChanges(state.profile)
+                        })
+                    })
+
+            }
+
+            // sbot.evt.publishPost({
+            //     file: file.toString('base64'),
+            //     description
+            // }, function (err, res) {
+            //     // @TODO update app state
+            //     if (cb) cb(err, res)
+            // })
+        },
+
+        getProfile: function (sbot, id) {
+            S(
+                sbot.links({
+                    source: id,
+                    dest: id,
+                    rel: 'about',
+                    values: true,
+                    reverse: true
+                }),
+                S.collect(function (err, res) {
+                    if (err) return state.profile.error.set(err)
+                    console.log('collect', err, res)
+                })
+            )
         }
+
     }
 
     return effects

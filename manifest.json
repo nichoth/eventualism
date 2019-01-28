@@ -98,7 +98,8 @@
   },
 
   "evt": {
-    "publishPost": "async"
+    "publishPost": "async",
+    "saveBlob": "async"
   }
 }
 

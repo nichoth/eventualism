@@ -4,7 +4,7 @@ var EVENTS = namespace({
     post: ['fileAdded', 'fileDropped', 'captionChange', 'submitNewPost',
         'resetForm'],
 
-    profile: ['submit']
+    profile: ['submit', 'selectAvatar']
 })
 
 module.exports = EVENTS
