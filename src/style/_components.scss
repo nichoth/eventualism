@@ -14,3 +14,14 @@
     }
 }
 
+.form-controls {
+    text-align: right;
+    button {
+        margin-left: 1em;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+
